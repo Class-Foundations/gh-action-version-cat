@@ -1,7 +1,7 @@
 # Docs: https://help.github.com/en/actions/building-actions/metadata-syntax-for-github-actions
 name: 'Version Cat'
 description: 'Get the version from a file and verify it has not been created already'
-author: 'blackboard-innersource'
+author: 'Class-Foundations'
 inputs:
   file:
     description: 'Look in this file to grab the version'

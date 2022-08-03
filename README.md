@@ -1,4 +1,4 @@
-![CD Workflow](https://github.com/blackboard-innersource/gh-action-version-cat/workflows/CD%20Workflow/badge.svg?event=push)
+![CD Workflow](https://github.com/Class-Foundations/gh-action-version-cat/workflows/CD%20Workflow/badge.svg?event=push)
 
 # GitHub Action: Version :smile_cat:
 
@@ -37,7 +37,7 @@ in your workflow like this:
 steps:
   - name: Version
     id: version
-    uses: blackboard-innersource/gh-action-version-cat@v1
+    uses: Class-Foundations/gh-action-version-cat@v1
 ```
 
 Not very exciting. Combine it with [create-release action](https://github.com/actions/create-release),
@@ -47,7 +47,7 @@ then you have continuous delivery:
 steps:
   - name: Version
     id: version
-    uses: blackboard-innersource/gh-action-version-cat@v1
+    uses: Class-Foundations/gh-action-version-cat@v1
 
   - name: Create Release ${{ steps.version.outputs.version }}
     if: github.event_name == 'push'
@@ -96,7 +96,7 @@ jobs:
 
       - name: Version
         id: version
-        uses: blackboard-innersource/gh-action-version-cat@v1
+        uses: Class-Foundations/gh-action-version-cat@v1
 
       - name: Create Release ${{ steps.version.outputs.version }}
         if: github.event_name == 'push'
