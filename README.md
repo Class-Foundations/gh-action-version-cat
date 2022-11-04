@@ -1,6 +1,6 @@
-![CD Workflow](https://github.com/Class-Foundations/gh-action-version-cat/workflows/CD%20Workflow/badge.svg?event=push)
-
 # GitHub Action: Version :smile_cat:
+
+[![CD Workflow](https://github.com/Class-Foundations/gh-action-version-cat/actions/workflows/cd.yaml/badge.svg?event=push)](https://github.com/Class-Foundations/gh-action-version-cat/actions/workflows/cd.yaml)
 
 This action just reads a file from your repository to get the next release version.
 It will also verify that the git tag does not already exist. If the tags does exist,
@@ -26,7 +26,7 @@ For all possible inputs and outputs see the [Action YAML](action.yml) file.
 Add a `VERSION` file in your repository. Add the following contents to the `VERSION` file
 (or whatever version you want to use):
 
-```
+```txt
 1.0.0
 ```
 
@@ -68,7 +68,7 @@ Here is a full working example.
 * For pull requests, all the steps will run except for the `Create Release` step.
   The `Version` step will validate the `VERSION` file and fail the build if the
   git tag already exists.
-* For updates to master, all steps will run and, if successful, release a new version.
+* For updates to `main`, all steps will run and, if successful, release a new version.
 
 ```yaml
 name: CD Workflow
@@ -76,10 +76,10 @@ name: CD Workflow
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   cd:
@@ -106,7 +106,7 @@ jobs:
         with:
           tag_name: ${{ steps.version.outputs.version }}
           release_name: ${{ steps.version.outputs.version }}
-``` 
+```
 
 ## Developing
 
