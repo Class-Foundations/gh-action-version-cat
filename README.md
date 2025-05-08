@@ -40,8 +40,8 @@ steps:
     uses: Class-Foundations/gh-action-version-cat@v1
 ```
 
-Not very exciting. Combine it with [create-release action](https://github.com/actions/create-release),
-then you have continuous delivery:
+Not very exciting. Combine it with a GitHub release, then you have continuous
+delivery:
 
 ```yaml
 steps:
@@ -51,12 +51,12 @@ steps:
 
   - name: Create Release ${{ steps.version.outputs.version }}
     if: github.event_name == 'push'
-    uses: actions/create-release@v1
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      tag_name: ${{ steps.version.outputs.version }}
-      release_name: ${{ steps.version.outputs.version }}
+    run: |
+      gh release create ${{ steps.version.outputs.version }} \
+        --title ${{ steps.version.outputs.version }} \
+        --target ${{ github.sha }}
 ```
 
 The above would create a tag and GitHub release named `v1.0.0`.
@@ -84,11 +84,11 @@ on:
 jobs:
   cd:
     name: Validate and Release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Test
         run: |
@@ -96,16 +96,16 @@ jobs:
 
       - name: Version
         id: version
-        uses: Class-Foundations/gh-action-version-cat@v1
+        uses: Class-Foundations/gh-action-version-cat@v3
 
       - name: Create Release ${{ steps.version.outputs.version }}
         if: github.event_name == 'push'
-        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.version.outputs.version }}
-          release_name: ${{ steps.version.outputs.version }}
+        run: |
+          gh release create ${{ steps.version.outputs.version }} \
+            --title ${{ steps.version.outputs.version }} \
+            --target ${{ github.sha }}
 ```
 
 ## Developing
