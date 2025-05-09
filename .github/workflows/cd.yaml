@@ -22,7 +22,7 @@ jobs:
     name: Integration test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./
         id: version
         with:
@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Test
         run: make
@@ -63,7 +63,7 @@ jobs:
 
       - name: Checkout ${{ steps.version.outputs.version }}
         if: github.event_name == 'push'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ steps.version.outputs.version }}
           fetch-depth: 0
