@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read  
+
 env:
   GIT_AUTHOR_NAME: github-actions[bot]
   GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
@@ -35,6 +38,8 @@ jobs:
   cd:
     name: Validate and Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
